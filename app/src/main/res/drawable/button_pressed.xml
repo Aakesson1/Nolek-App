@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <shape xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="rectangle">
+
+        <solid android:color="#FFFF" /> <!-- Baggrunds farven i hex (#E64A19 er en mørkere orange farve) -->
+
+        <corners android:radius="8dp" /> <!-- Afrundede hjørner med en radius på 8dp -->
+
+    </shape>
