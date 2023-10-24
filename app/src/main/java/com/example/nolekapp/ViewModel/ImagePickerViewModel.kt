@@ -1,14 +1,23 @@
 package com.example.nolekapp.ViewModel
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.hardware.camera2.CameraDevice
+import android.hardware.camera2.CameraManager
 import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 
-class ImagePickerViewModel : ViewModel() {
+
+class ImagePickerViewModel(application: Application) : AndroidViewModel(application) {
     private companion object {
         const val BILLEDE_VAELGER_RESULTAT = 1
     }
@@ -32,3 +41,8 @@ class ImagePickerViewModel : ViewModel() {
     }
 
 }
+
+
+
+
+

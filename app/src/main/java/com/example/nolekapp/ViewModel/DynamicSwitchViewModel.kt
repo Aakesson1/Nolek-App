@@ -8,9 +8,10 @@ import android.widget.Switch
 import androidx.lifecycle.ViewModel
 import com.example.nolekapp.R
 
-class DynamicSwitchViewModel : ViewModel() {
+class DynamicSwitchViewModel() : ViewModel() {
     val switchesList = mutableListOf<Switch>()
     private lateinit var parentLayout: LinearLayout
+
 
     fun createSwitches(count: Int, context: Context, parentLayout: LinearLayout) {
         removeAllSwitches() // Fjern eventuelle eksisterende skifter
@@ -51,5 +52,6 @@ class DynamicSwitchViewModel : ViewModel() {
         switchesList.clear()
         Log.d("DynamicSwitchViewModel", "Removed all switches")
     }
+
 
 }

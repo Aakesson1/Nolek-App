@@ -1,4 +1,4 @@
-package com.example.nolekapp.Model
+package com.example.nolekapp.View
 
 import android.app.Activity
 import android.app.AlertDialog

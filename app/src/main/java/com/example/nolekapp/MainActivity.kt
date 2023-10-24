@@ -3,30 +3,31 @@ package com.example.nolekapp
 import com.example.nolekapp.ViewModel.ImagePickerViewModel
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.example.nolekapp.Model.InputManager
-import com.example.nolekapp.Model.SwitchManager
+import com.example.nolekapp.View.InputManager
+import com.example.nolekapp.View.SwitchManager
 import com.example.nolekapp.ViewModel.DynamicSwitchViewModel
 
+
+@Suppress("DEPRECATION")
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: ImagePickerViewModel by viewModels()
     private val switchViewModel: DynamicSwitchViewModel by viewModels()
+    private val viewModel: ImagePickerViewModel by viewModels()
 
     private lateinit var switchManager: SwitchManager
     private lateinit var inputManager: InputManager
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
         val switchesLayout = findViewById<LinearLayout>(R.id.switches_layout)
+
 
         switchManager = SwitchManager(applicationContext, parentLayout = switchesLayout)
         inputManager = InputManager(this, switchManager)
@@ -57,6 +58,14 @@ class MainActivity : ComponentActivity() {
             switchViewModel.setAllSwitchesToFalse()
         }
 
+        val backbutton = findViewById<Button>(R.id.backButton)
+        backbutton.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
     }
 
     @Deprecated("Deprecated in Java")
@@ -65,4 +74,9 @@ class MainActivity : ComponentActivity() {
         viewModel.handleActivityResult(requestCode, resultCode, data, findViewById(R.id.imageView))
     }
 
+
+
+
+
 }
+

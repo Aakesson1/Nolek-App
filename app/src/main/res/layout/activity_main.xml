@@ -41,6 +41,7 @@
             app:layout_constraintVertical_bias="0.579"
             tools:visibility="visible" />
 
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
@@ -92,14 +93,11 @@
             android:id="@+id/importer_billede_knap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="632dp"
-            android:layout_marginBottom="500dp"
             android:text="Importer Billede"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.022" />
+            app:layout_constraintTop_toBottomOf="@+id/open_camera_button" />
 
         <Button
             android:id="@+id/create_switches_button"
@@ -110,6 +108,29 @@
             android:text="Create Switches"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/importer_billede_knap" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="57dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:foreground="@android:drawable/ic_menu_revert"
+            android:foregroundTint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/open_camera_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="156dp"
+            android:layout_marginEnd="648dp"
+            android:onClick="takePhoto"
+            android:text="Take Photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
 
 

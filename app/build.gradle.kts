@@ -93,8 +93,8 @@ dependencies {
     val room_version = "2.5.2"
 
     implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0")
+    ksp("androidx.room:room-compiler:$room_version")
+
 
     // To use Kotlin annotation processing tool (kapt)
     ksp("androidx.room:room-compiler:$room_version")
