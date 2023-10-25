@@ -7,6 +7,9 @@ import android.widget.Button
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MenuActivity : AppCompatActivity() {
+    private fun navigateBack() {
+        finish() // Dette vil afslutte den nuværende aktivitet og gå tilbage til den forrige.
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

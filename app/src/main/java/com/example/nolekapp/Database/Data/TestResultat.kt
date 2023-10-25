@@ -4,10 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class TestObject(
+data class TestResultat(
     val Name: String,
     val Description: String,
-    val sniffing_point: Int,
+    val sniffing_point: String,
     val Objecttype: String,
     @PrimaryKey(autoGenerate = true)
     val Serienumber_id: Int = 0
