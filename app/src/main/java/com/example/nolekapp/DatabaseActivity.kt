@@ -27,7 +27,7 @@ class DatabaseActivity : AppCompatActivity() {
             applicationContext,
             AppDatabase::class.java,
             "appdatabase.db"
-        ).addMigrations(AppDatabase.MIGRATION_1_2).build()
+        ).fallbackToDestructiveMigration().build()
     }
     private val viewModel by viewModels<TestResultatViewModel>(
         factoryProducer = {

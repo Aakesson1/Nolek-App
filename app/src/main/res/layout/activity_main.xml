@@ -13,16 +13,23 @@
 
         <LinearLayout
             android:id="@+id/switches_layout"
-            android:layout_width="214dp"
-            android:layout_height="610dp"
+            android:layout_width="220dp"
+            android:layout_height="207dp"
             android:layout_marginTop="132dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginEnd="300dp"
+            android:background="@drawable/custom_border"
             android:orientation="vertical"
             android:padding="16dp"
-            android:background="@drawable/custom_border"
-            app:layout_constraintEnd_toStartOf="@+id/button3"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:context=".MainActivity">
+
+            <TextView
+                android:id="@+id/questionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -50,45 +57,28 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="20dp" />
 
-        <Button
-            android:id="@+id/button3"
+        <EditText
+            android:id="@+id/testInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="250dp"
-            android:text="All Not OK"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button" />
+            android:layout_marginTop="204dp"
+            android:layout_marginEnd="29dp"
+            android:hint="Hvor mange punkter skal testes?"
+            android:inputType="number"
+            app:layout_constraintEnd_toStartOf="@+id/switches_layout"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/generateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="80dp"
-            android:layout_marginBottom="250dp"
-            android:text="All Ok"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="150dp"
-            android:layout_marginBottom="100dp"
-            android:text="Send"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/remove_switches_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="500dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="632dp"
-            android:text="Remove Switches"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/create_switches_button" />
+            android:text="Generer Spørgsmål"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/testInput"
+            tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/importer_billede_knap"
@@ -99,16 +89,6 @@
             android:text="Importer Billede"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/open_camera_button" />
-
-        <Button
-            android:id="@+id/create_switches_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="632dp"
-            android:text="Create Switches"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/importer_billede_knap" />
 
         <Button
             android:id="@+id/backButton"
@@ -125,31 +105,31 @@
             android:id="@+id/open_camera_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="156dp"
-            android:layout_marginEnd="648dp"
+            android:layout_marginTop="424dp"
+            android:layout_marginEnd="660dp"
             android:text="Take Photo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/completionButton1"
+            android:id="@+id/ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="48dp"
-            android:text="Button 1"
-            app:layout_constraintStart_toEndOf="@+id/completionButton2"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginEnd="432dp"
+            android:layout_marginBottom="472dp"
+            android:text="Ok"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
-            android:id="@+id/completionButton2"
+            android:id="@+id/notOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="104dp"
-            android:layout_marginTop="48dp"
-            android:text="Button 2"
-            app:layout_constraintStart_toEndOf="@+id/backButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginEnd="300dp"
+            android:layout_marginBottom="472dp"
+            android:text="Not OK"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

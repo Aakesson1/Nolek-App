@@ -103,6 +103,7 @@ fun TestResultatScreen(
                     }
                 }
             }
+            state.testResultat?.let { testResultats ->
             items(state.testResultat) { testresultat ->
                 Row(
                     modifier = Modifier.fillMaxWidth()
@@ -111,7 +112,8 @@ fun TestResultatScreen(
                         modifier = Modifier.weight(1f)
                     ) {
                         Text(
-                            text = "${testresultat.Name} ${testresultat.Description} ${testresultat.sniffing_point} ${testresultat.Objecttype}",
+                            text = "${testresultat.Name} ${testresultat.Description} ${testresultat.sniffing_point} ${testresultat.Objecttype}" +
+                                    "${testresultat.Reason}${testresultat.Status}",
                             fontSize = 20.sp
                         )
 
@@ -128,4 +130,5 @@ fun TestResultatScreen(
             }
         }
     }
+}
 }

@@ -34,7 +34,7 @@ fun AddTestResultatDialog(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 TextField(
-                    value = state.Name,
+                    value = state.Name.toString(),
                     onValueChange = {
                         onEvent(AppEvent.SetName(it))
                     },
@@ -43,7 +43,7 @@ fun AddTestResultatDialog(
                     }
                 )
                 TextField(
-                    value = state.Description,
+                    value = state.Description.toString(),
                     onValueChange = {
                         onEvent(AppEvent.SetDescription(it))
                     },
@@ -52,7 +52,7 @@ fun AddTestResultatDialog(
                     }
                 )
                 TextField(
-                    value = state.sniffing_point,
+                    value = state.sniffing_point.toString(),
                     onValueChange = {
                         onEvent(AppEvent.SetSnifftingPoint(it))
                     },
@@ -61,7 +61,7 @@ fun AddTestResultatDialog(
                     }
                 )
                 TextField(
-                    value = state.Objecttype,
+                    value = state.Objecttype.toString(),
                     onValueChange = {
                         onEvent(AppEvent.SetObjectType(it))
                     },

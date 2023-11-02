@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import com.example.nolekapp.Database.Data.TestResultat
 import kotlinx.coroutines.flow.*
 
-class TestResultatViewModel(private val dao: TestResultatDao): ViewModel() {
+class TestResultatViewModel(val dao: TestResultatDao): ViewModel() {
 
     private val _sorttype = MutableStateFlow(SortType.NAME)
     private val _testResultat = _sorttype
@@ -49,16 +49,16 @@ class TestResultatViewModel(private val dao: TestResultatDao): ViewModel() {
                 val Description = state.value.Description
                 val sniffing_point = state.value.sniffing_point
                 val Objecttype = state.value.Objecttype
-
-                if (Name.isBlank() ||Description.isBlank() || sniffing_point.isBlank() || Objecttype.isBlank()){
-                    return
-                }
+                val Reason = state.value.Reason
+                val Status= state.value.Status
 
                     val testResultat = TestResultat(
                         Name = Name,
                         Description = Description,
                         sniffing_point = sniffing_point,
-                        Objecttype = Objecttype
+                        Objecttype = Objecttype,
+                        Reason = Reason,
+                        Status = Status
                     )
                 viewModelScope.launch { dao.upsertTestresultat(testResultat) }
                 _state.update { it.copy(

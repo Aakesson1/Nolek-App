@@ -2,6 +2,8 @@ package com.example.nolekapp.Database.Dao
 
 import androidx.room.Dao
 import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Upsert
 import com.example.nolekapp.Database.Data.TestResultat
@@ -9,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TestResultatDao {
-    @Upsert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertTestresultat(testResultat: TestResultat)
     @Delete
     suspend fun deleteTestResultat(testResultat: TestResultat)
@@ -18,4 +20,5 @@ interface TestResultatDao {
     fun getallTestResultat(): Flow<List<TestResultat>>
     @Query("SELECT * FROM TestResultat ORDER BY Name ASC")
     fun getallTestResultatOrderedByName(): Flow<List<TestResultat>>
+
 }

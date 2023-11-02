@@ -7,14 +7,15 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.nolekapp.Database.Dao.TestResultatDao
 import com.example.nolekapp.Database.Data.TestResultat
 
-@Database(entities = [TestResultat::class], version = 2)
+@Database(entities = [TestResultat::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract val dao: TestResultatDao
 
     companion object {
-        val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+        val MIGRATION_2_3: Migration = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE TestObject RENAME TO TestResultat")
+                database.execSQL("ALTER TABLE TestResultat ADD COLUMN Reason TEXT NOT NULL DEFAULT ''")
+                database.execSQL("ALTER TABLE TestResultat ADD COLUMN Status TEXT NOT NULL DEFAULT ''")
             }
         }
     }

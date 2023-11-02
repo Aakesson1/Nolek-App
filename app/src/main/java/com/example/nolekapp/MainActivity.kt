@@ -1,88 +1,102 @@
 package com.example.nolekapp
 
-import com.example.nolekapp.ViewModel.ImagePickerViewModel
+import CustomLayout
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.activity.ComponentActivity
+import android.widget.*
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.nolekapp.View.InputManager
-import com.example.nolekapp.View.SwitchManager
-import com.example.nolekapp.ViewModel.DynamicSwitchViewModel
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import com.example.nolekapp.Model.AppEvent
+import com.example.nolekapp.View.TestResultatScreen
+import com.example.nolekapp.ViewModel.ImagePickerViewModel
 import com.example.nolekapp.ViewModel.StatusViewModel
+import com.example.nolekapp.ViewModel.TestResultatViewModel
+import com.example.nolekapp.ui.theme.NolekAppTheme
 
+class MainActivity : AppCompatActivity() {
 
-@Suppress("DEPRECATION")
-class MainActivity : ComponentActivity() {
-
-    private val switchViewModel: DynamicSwitchViewModel by viewModels()
     private val viewModel: ImagePickerViewModel by viewModels()
     private val statusViewModel: StatusViewModel by viewModels()
+    private val testResultatViewModel: TestResultatViewModel by viewModels()
 
-
-        private lateinit var switchManager: SwitchManager
-    private lateinit var inputManager: InputManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
+        setContent {
+            NolekAppTheme {
+                CustomLayout()
+            }
+        }
+    }
 
+    private fun setupUIComponents() {
+        val okButton = findViewById<Button>(R.id.ok)
+        val notOkButton = findViewById<Button>(R.id.notOk)
+        val questionTextView = findViewById<TextView>(R.id.questionTextView)
+        okButton.isEnabled = false
+        notOkButton.isEnabled = false
 
-        val switchesLayout = findViewById<LinearLayout>(R.id.switches_layout)
+        statusViewModel.currentQuestion.observe(this) { question ->
+            questionTextView.text = question
+            val isQuestionPresent = !question.isNullOrBlank()
+            okButton.isEnabled = isQuestionPresent
+            notOkButton.isEnabled = isQuestionPresent
+        }
 
-
-        switchManager = SwitchManager(applicationContext, parentLayout = switchesLayout)
-        inputManager = InputManager(this, switchManager)
-
-        val createSwitchesButton = findViewById<Button>(R.id.create_switches_button)
-        createSwitchesButton.setOnClickListener {
+        findViewById<Button>(R.id.ok).setOnClickListener {
             statusViewModel.showNextQuestion()
         }
 
-        val removeSwitchesButton = findViewById<Button>(R.id.remove_switches_button)
-        removeSwitchesButton.setOnClickListener {
-            switchManager.removeAllSwitches()
+        findViewById<Button>(R.id.notOk).setOnClickListener {
+            val input = EditText(this)
+            val builder = AlertDialog.Builder(this)
+                .setTitle("Angiv begrundelse")
+                .setView(input)
+                .setPositiveButton("OK") { _, _ ->
+                    statusViewModel.showNextQuestion()
+                }
+                .setNegativeButton("Annuller") { dialog, _ ->
+                    dialog.dismiss()
+                }
+            builder.show()
         }
 
-        // Knappen til at importere et billede
-        val importerBilledeKnap = findViewById<Button>(R.id.importer_billede_knap)
-        importerBilledeKnap.setOnClickListener {
+        findViewById<Button>(R.id.generateButton).setOnClickListener {
+
+            val input = EditText(this)
+            val builder = AlertDialog.Builder(this)
+                .setTitle("Angiv navn")
+                .setView(input)
+                .setPositiveButton("OK") { _, _ ->
+                    val name = input.text.toString()
+                    if(name.isNotEmpty()) {
+                        val setNameEvent = AppEvent.SetName(name)
+                        testResultatViewModel.onEvent(setNameEvent)
+                        }
+                }
+                .setNegativeButton("Annuller") { dialog, _ ->
+                    dialog.dismiss()
+                }
+            builder.show()
+
+            statusViewModel.setQuestionsBasedOnPoints(
+                findViewById<EditText>(R.id.testInput).text.toString().toIntOrNull() ?: 0
+            )
+        }
+
+        findViewById<Button>(R.id.importer_billede_knap).setOnClickListener {
             viewModel.handleImportButtonClick(this)
+            Toast.makeText(this, "Billede importeret!", Toast.LENGTH_SHORT).show()
         }
 
-        val allOkButton = findViewById<Button>(R.id.button)
-        allOkButton.setOnClickListener {
-            switchViewModel.setAllSwitchesToTrue()
+        findViewById<Button>(R.id.backButton).setOnClickListener {
+            startActivity(Intent(this, MenuActivity::class.java))
         }
-
-        val allNotOkButton = findViewById<Button>(R.id.button3)
-        allNotOkButton.setOnClickListener {
-            switchViewModel.setAllSwitchesToFalse()
-        }
-
-        val backbutton = findViewById<Button>(R.id.backButton)
-        backbutton.setOnClickListener {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
-
-        }
-        statusViewModel.completionButton1Visibility.observe(this, { visibility ->
-            findViewById<Button>(R.id.completionButton1).visibility = visibility
-        })
-
-        statusViewModel.completionButton2Visibility.observe(this, { visibility ->
-            findViewById<Button>(R.id.completionButton2).visibility = visibility
-        })
-
-
     }
 
     @Deprecated("Deprecated in Java")
@@ -91,8 +105,4 @@ class MainActivity : ComponentActivity() {
         viewModel.handleActivityResult(requestCode, resultCode, data, findViewById(R.id.imageView))
     }
 
-
-
-
 }
-
