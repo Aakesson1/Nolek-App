@@ -2,17 +2,13 @@ package com.example.nolekapp.ViewModel
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.hardware.camera2.CameraDevice
-import android.hardware.camera2.CameraManager
 import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.activity.compose.ManagedActivityResultLauncher
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 
@@ -22,13 +18,12 @@ class ImagePickerViewModel(application: Application) : AndroidViewModel(applicat
         const val BILLEDE_VAELGER_RESULTAT = 1
     }
 
-    fun handleImportButtonClick(context: Context) {
+    fun handleImportButtonClick(launcher: ActivityResultLauncher<Intent>) {
         Log.d("MyApp", "handleImportButtonClick called")
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
-        (context as Activity).startActivityForResult(intent, BILLEDE_VAELGER_RESULTAT)
+        launcher.launch(intent)
     }
-
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?, imageView: ImageView) {
         Log.d("MyApp", "handleActivityResult called")
         if (requestCode == BILLEDE_VAELGER_RESULTAT && resultCode == Activity.RESULT_OK && data != null) {

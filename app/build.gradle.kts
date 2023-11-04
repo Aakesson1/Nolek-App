@@ -4,7 +4,8 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("com.google.devtools.ksp")
-
+    id ("dagger.hilt.android.plugin")
+    id ("io.realm.kotlin")
 }
 
 android {
@@ -98,6 +99,11 @@ dependencies {
 
     implementation("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
+    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")  // Make sure to use the latest version
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.5.4")
 
 
     // To use Kotlin annotation processing tool (kapt)
@@ -122,4 +128,22 @@ dependencies {
 
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:$room_version")
+
+    // Kotlin coroutine dependency
+  /*  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
+    // MongoDB Kotlin driver dependency
+    implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.10.1")
+
+   */
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation ("io.realm.kotlin:library-base:1.6.1")
+
+    // Dagger Hilt
+    implementation ("com.google.dagger:hilt-android:2.44.2")
+    ksp ("com.google.dagger:hilt-compiler:2.44.2")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+    // Desugar JDK
+    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.0.2")
 }

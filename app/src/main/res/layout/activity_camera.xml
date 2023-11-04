@@ -29,8 +29,7 @@
     <TextureView
         android:id="@+id/textureView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rotation="270" />
+        android:layout_height="wrap_content" />
 
 
 </RelativeLayout>

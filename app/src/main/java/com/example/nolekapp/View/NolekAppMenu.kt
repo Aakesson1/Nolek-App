@@ -2,11 +2,13 @@ package com.example.nolekapp.View
 
 import android.content.Intent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,9 +21,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.core.content.ContextCompat.startActivity
+import com.example.nolekapp.CameraActivity
 import com.example.nolekapp.DatabaseActivity
 import com.example.nolekapp.MainActivity
 import com.example.nolekapp.R
@@ -64,15 +69,17 @@ fun NolekAppMenu() {
             }
         }
 
-
         // Camera icon at bottom-right corner
-        Icon(
-            painter = painterResource(id = R.drawable.baseline_photo_camera_24),
-            contentDescription = null,
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(16.dp)
-        )
+    }
+    Column(
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ){
+        Button(onClick = {
+            val intent = Intent(context, CameraActivity::class.java)
+            context.startActivity(intent)
+        }) {
+            Text("Camera")
+        }
     }
 }
-

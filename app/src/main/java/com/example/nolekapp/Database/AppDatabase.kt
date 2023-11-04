@@ -1,22 +1,35 @@
 package com.example.nolekapp.Database
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.nolekapp.Database.Dao.TestResultatDao
 import com.example.nolekapp.Database.Data.TestResultat
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
+import javax.inject.Singleton
 
-@Database(entities = [TestResultat::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
-    abstract val dao: TestResultatDao
+@InstallIn(SingletonComponent::class)
+@Module
+object AppDatabase{
 
-    companion object {
-        val MIGRATION_2_3: Migration = object : Migration(2, 3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE TestResultat ADD COLUMN Reason TEXT NOT NULL DEFAULT ''")
-                database.execSQL("ALTER TABLE TestResultat ADD COLUMN Status TEXT NOT NULL DEFAULT ''")
-            }
-        }
+    @Singleton
+    @Provides
+    fun provideRealm(): Realm {
+        val config = RealmConfiguration.Builder(
+            schema = setOf(
+                TestResultat::class
+            )
+        )
+            .compactOnLaunch()
+            .build()
+        return Realm.open(config)
     }
+
+    @Singleton
+    @Provides
+    fun provideTestResultatRepository(realm: Realm): TestResultatRepository {
+        return TestResultatRespositoryimpl(realm = realm)
+    }
+
 }

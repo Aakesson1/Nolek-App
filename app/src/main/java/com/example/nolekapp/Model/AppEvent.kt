@@ -8,6 +8,8 @@ sealed interface AppEvent {
     data class SetDescription(val Description: String) : AppEvent
     data class SetSnifftingPoint(val sniffing_point: String) : AppEvent
     data class SetObjectType(val Objecttype: String) : AppEvent
+    data class SetStatus(val Status: String) : AppEvent
+    data class SetReason(val Reason: String) : AppEvent
     object ShowDialog: AppEvent
     object HideDialog: AppEvent
     data class SortTestResultat(val sortType: SortType): AppEvent

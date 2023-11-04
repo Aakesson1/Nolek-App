@@ -8,10 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import com.example.nolekapp.Model.AppEvent
-import com.example.nolekapp.View.TestResultatScreen
 import com.example.nolekapp.ViewModel.ImagePickerViewModel
 import com.example.nolekapp.ViewModel.StatusViewModel
 import com.example.nolekapp.ViewModel.TestResultatViewModel
@@ -19,7 +16,6 @@ import com.example.nolekapp.ui.theme.NolekAppTheme
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: ImagePickerViewModel by viewModels()
     private val statusViewModel: StatusViewModel by viewModels()
     private val testResultatViewModel: TestResultatViewModel by viewModels()
 
@@ -29,11 +25,11 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             NolekAppTheme {
-                CustomLayout()
+                CustomLayout(statusViewModel = statusViewModel)
             }
         }
     }
-
+/*
     private fun setupUIComponents() {
         val okButton = findViewById<Button>(R.id.ok)
         val notOkButton = findViewById<Button>(R.id.notOk)
@@ -89,20 +85,11 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        findViewById<Button>(R.id.importer_billede_knap).setOnClickListener {
-            viewModel.handleImportButtonClick(this)
-            Toast.makeText(this, "Billede importeret!", Toast.LENGTH_SHORT).show()
-        }
-
         findViewById<Button>(R.id.backButton).setOnClickListener {
             startActivity(Intent(this, MenuActivity::class.java))
         }
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        viewModel.handleActivityResult(requestCode, resultCode, data, findViewById(R.id.imageView))
-    }
+ */
 
 }

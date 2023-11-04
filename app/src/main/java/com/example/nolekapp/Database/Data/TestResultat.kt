@@ -1,16 +1,18 @@
 package com.example.nolekapp.Database.Data
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import io.realm.kotlin.types.RealmInstant
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
 
-@Entity
-data class TestResultat(
-    val Name: String?,
-    val Description: String?,
-    val sniffing_point: String?,
-    val Objecttype: String?,
-    @PrimaryKey(autoGenerate = true)
-    val Serienumber_id: Int = 0,
-    val Reason: String?,
-    val Status: String?
-)
+
+class TestResultat : RealmObject{
+    @PrimaryKey var serienumberId: Int = 0
+    var name: String = ""
+    var description: String = ""
+    var sniffingPoint: String = ""
+    var objectType: String = ""
+    var reason: String = ""
+    var status: String = ""
+    var timestamp: RealmInstant = RealmInstant.now()
+}
+

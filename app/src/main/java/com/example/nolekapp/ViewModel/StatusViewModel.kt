@@ -31,8 +31,11 @@ class StatusViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun getNextQuestion(): String? {
-        return if (currentQuestionIndex < selectedQuestions.size) {
+        val nextQuestion = if (currentQuestionIndex < selectedQuestions.size) {
             selectedQuestions[currentQuestionIndex++]
         } else null
+        println("Next Question: $nextQuestion, Index: $currentQuestionIndex")
+        return nextQuestion
     }
+
 }

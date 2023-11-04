@@ -34,7 +34,7 @@ fun AddTestResultatDialog(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 TextField(
-                    value = state.Name.toString(),
+                    value = state.Name,
                     onValueChange = {
                         onEvent(AppEvent.SetName(it))
                     },
@@ -43,16 +43,16 @@ fun AddTestResultatDialog(
                     }
                 )
                 TextField(
-                    value = state.Description.toString(),
+                    value = state.Reason,
                     onValueChange = {
-                        onEvent(AppEvent.SetDescription(it))
+                        onEvent(AppEvent.SetReason(it))
                     },
                     placeholder = {
-                        Text(text = "Description")
+                        Text(text = "Medarbejder ID")
                     }
                 )
                 TextField(
-                    value = state.sniffing_point.toString(),
+                    value = state.sniffing_point,
                     onValueChange = {
                         onEvent(AppEvent.SetSnifftingPoint(it))
                     },
@@ -61,7 +61,25 @@ fun AddTestResultatDialog(
                     }
                 )
                 TextField(
-                    value = state.Objecttype.toString(),
+                    value = state.Status,
+                    onValueChange = {
+                        onEvent(AppEvent.SetStatus(it))
+                    },
+                    placeholder = {
+                        Text(text = "Status")
+                    }
+                )
+                TextField(
+                    value = state.Description,
+                    onValueChange = {
+                        onEvent(AppEvent.SetDescription(it))
+                    },
+                    placeholder = {
+                        Text(text = "Description")
+                    }
+                )
+                TextField(
+                    value = state.Objecttype,
                     onValueChange = {
                         onEvent(AppEvent.SetObjectType(it))
                     },
