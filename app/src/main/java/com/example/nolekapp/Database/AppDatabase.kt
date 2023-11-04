@@ -1,6 +1,8 @@
 package com.example.nolekapp.Database
 
 import com.example.nolekapp.Database.Data.TestResultat
+import com.example.nolekapp.Database.Data.TestResultatRepository
+import com.example.nolekapp.Database.Data.TestResultatRespositoryimpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,7 +10,6 @@ import dagger.hilt.components.SingletonComponent
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import javax.inject.Singleton
-
 @InstallIn(SingletonComponent::class)
 @Module
 object AppDatabase{

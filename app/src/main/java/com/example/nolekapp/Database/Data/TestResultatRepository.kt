@@ -1,6 +1,5 @@
-package com.example.nolekapp.Database
+package com.example.nolekapp.Database.Data
 
-import com.example.nolekapp.Database.Data.TestResultat
 import kotlinx.coroutines.flow.Flow
 
 interface TestResultatRepository {

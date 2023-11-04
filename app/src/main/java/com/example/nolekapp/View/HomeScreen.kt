@@ -32,17 +32,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import com.example.nolekapp.MenuActivity
-import coil.compose.rememberImagePainter
 import com.example.nolekapp.ViewModel.StatusViewModel
 import androidx.compose.runtime.livedata.observeAsState
+import coil.compose.rememberAsyncImagePainter
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomLayout(statusViewModel: StatusViewModel) {
     val context = LocalContext.current
-   // val dao = AppDatabase.getInstance(context).TestResultDao()
-    //val testResultatViewModel = TestResultatViewModel(dao)
 
     var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
     var expanded by remember { mutableStateOf(false) }
@@ -84,7 +82,7 @@ fun CustomLayout(statusViewModel: StatusViewModel) {
             ) {
                 if (selectedImageUri != null) {
                     Image(
-                        painter = rememberImagePainter(data = selectedImageUri),
+                        painter = rememberAsyncImagePainter(model = selectedImageUri),
                         contentDescription = null,
                         modifier = Modifier.fillMaxSize()
                     )
@@ -158,8 +156,6 @@ fun CustomLayout(statusViewModel: StatusViewModel) {
                         .setTitle("Angiv begrundelse")
                         .setView(input)
                         .setPositiveButton("OK") { _, _ ->
-                            val description = input.text.toString()
-                            //testResultatViewModel.onEvent(AppEvent.SetDescription(description))
                             statusViewModel.showNextQuestion()
                         }
                         .setNegativeButton("Annuller") { dialog, _ ->

@@ -6,24 +6,21 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
-import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 
 
 class ImagePickerViewModel(application: Application) : AndroidViewModel(application) {
     private companion object {
         const val BILLEDE_VAELGER_RESULTAT = 1
     }
-
     fun handleImportButtonClick(launcher: ActivityResultLauncher<Intent>) {
         Log.d("MyApp", "handleImportButtonClick called")
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         launcher.launch(intent)
     }
+
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?, imageView: ImageView) {
         Log.d("MyApp", "handleActivityResult called")
         if (requestCode == BILLEDE_VAELGER_RESULTAT && resultCode == Activity.RESULT_OK && data != null) {
@@ -36,8 +33,3 @@ class ImagePickerViewModel(application: Application) : AndroidViewModel(applicat
     }
 
 }
-
-
-
-
-

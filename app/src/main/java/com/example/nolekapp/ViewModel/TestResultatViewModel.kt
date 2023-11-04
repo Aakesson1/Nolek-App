@@ -3,7 +3,7 @@ package com.example.nolekapp.ViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nolekapp.Database.Data.TestResultat
-import com.example.nolekapp.Database.TestResultatRepository
+import com.example.nolekapp.Database.Data.TestResultatRepository
 import com.example.nolekapp.Model.AppEvent
 import com.example.nolekapp.Model.SortType
 import com.example.nolekapp.Model.TestResultatState
@@ -52,8 +52,6 @@ class TestResultatViewModel @Inject constructor(private val repository: TestResu
                         this.objectType = objectType
                         this.reason = reason
                         this.status = status
-                        // serienumberId will be set to its default value of 0 unless you specify otherwise.
-                        // timestamp is automatically set to the current time by default.
                     }
                     repository.insertTestResultat(newTestResultat)
                     _state.update {

@@ -1,7 +1,6 @@
-package com.example.nolekapp.Database
+package com.example.nolekapp.Database.Data
 
 import android.util.Log
-import com.example.nolekapp.Database.Data.TestResultat
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 import kotlinx.coroutines.flow.Flow
