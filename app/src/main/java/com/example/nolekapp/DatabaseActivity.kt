@@ -2,6 +2,7 @@ package com.example.nolekapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -11,37 +12,25 @@ import io.realm.kotlin.RealmConfiguration
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.example.nolekapp.Database.Constants.APP_ID
 import com.example.nolekapp.Database.Data.TestResultat
-import com.example.nolekapp.Database.Data.TestResultatRespositoryimpl
+import com.example.nolekapp.Database.Data.TestResultatRepository
+import com.example.nolekapp.Database.MongoDB
 import com.example.nolekapp.View.TestResultatScreen
 import com.example.nolekapp.ui.theme.NolekAppTheme
 import com.example.nolekapp.ViewModel.TestResultatViewModel
 import io.realm.kotlin.Realm
+import io.realm.kotlin.internal.platform.runBlocking
+import io.realm.kotlin.mongodb.App
+import okhttp3.Credentials
 
 // ...
-
 class DatabaseActivity : AppCompatActivity() {
 
-    private lateinit var realm: Realm
-
     private val viewModel by viewModels<TestResultatViewModel> {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                if (modelClass.isAssignableFrom(TestResultatViewModel::class.java)) {
-                    if (!::realm.isInitialized) {
-                        val configuration = RealmConfiguration.Builder(schema = setOf(TestResultat::class))
-                            .name("default.realm")
-                            .build()
-                        realm = Realm.open(configuration)
-                    }
-                    val repository = TestResultatRespositoryimpl(realm)
-                    @Suppress("UNCHECKED_CAST")
-                    return TestResultatViewModel(repository) as T
-                }
-                throw IllegalArgumentException("Unknown ViewModel class")
-            }
-        }
+        ViewModelFactory()
     }
+
     private fun navigateToMenu() {
         val intent = Intent(this, MenuActivity::class.java)
         startActivity(intent)
@@ -49,11 +38,6 @@ class DatabaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val configuration = RealmConfiguration.Builder(schema = setOf(TestResultat::class))
-            .name("default.realm")
-            .build()
-        realm = Realm.open(configuration)
-
         setContent {
             NolekAppTheme {
                 val state by viewModel.state.collectAsState()
@@ -62,5 +46,14 @@ class DatabaseActivity : AppCompatActivity() {
         }
     }
 
-
+    inner class ViewModelFactory : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(TestResultatViewModel::class.java)) {
+                return TestResultatViewModel(MongoDB) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
 }
+

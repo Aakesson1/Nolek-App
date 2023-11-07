@@ -101,7 +101,7 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
     implementation("io.coil-kt:coil-compose:2.5.0")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")  // Make sure to use the latest version
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     implementation ("androidx.compose.runtime:runtime-livedata:1.5.4")
 
@@ -137,7 +137,8 @@ dependencies {
 
    */
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation ("io.realm.kotlin:library-base:1.6.1")
+    implementation ("io.realm.kotlin:library-base:1.8.0")
+    implementation("io.realm.kotlin:library-sync:1.8.0")
 
     // Dagger Hilt
     implementation ("com.google.dagger:hilt-android:2.44.2")
@@ -146,4 +147,9 @@ dependencies {
 
     // Desugar JDK
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.0.2")
+    // Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    // Gson converter for Retrofit
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
 }

@@ -5,7 +5,7 @@ import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-
+/*
 class TestResultatRespositoryimpl(val realm: Realm) : TestResultatRepository {
     override fun getData(): Flow<List<TestResultat>>{
         return realm.query<TestResultat>().asFlow().map { it.list }
@@ -21,19 +21,18 @@ class TestResultatRespositoryimpl(val realm: Realm) : TestResultatRepository {
 
     override suspend fun updateTestResultat(testResultat: TestResultat) {
         realm.write {
-            val queriedTestResultat = query<TestResultat>(query = "_id == $0", testResultat.serienumberId).first().find()
+            val queriedTestResultat = query<TestResultat>("_id == $0", testResultat.serienumberId).first().find()
             queriedTestResultat?.name = testResultat.name
         }
     }
 
-    override suspend fun deleteTestResultat(id: TestResultat) {
+    override suspend fun deleteTestResultat(testResultat: TestResultat) {
         realm.write {
-            val person = query<TestResultat>(query = "serienumberId == $0", id).first().find()
-            try {
-                person?.let { delete(it) }
-            } catch (e: Exception) {
-                Log.d("TestResultatRepositoryImpl", "${e.message}")
-            }
+            val queriedTestResultat = query<TestResultat>("serienumberId == $0", testResultat.serienumberId).first().find()
+            queriedTestResultat?.let { delete(it) }
         }
     }
 }
+
+
+ */

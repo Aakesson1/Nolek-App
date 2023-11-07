@@ -36,6 +36,7 @@ class TestResultatViewModel @Inject constructor(private val repository: TestResu
             AppEvent.HideDialog -> {
                 _state.update { it.copy(isAddingTestResultat = false) }
             }
+
             AppEvent.SaveTestResultat -> {
                 viewModelScope.launch {
                     val name = state.value.Name

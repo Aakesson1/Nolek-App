@@ -109,36 +109,36 @@ fun TestResultatScreen(
                     }
                 }
             }
-            state.testResultat?.let { testResultats ->
-            items(state.testResultat) { testresultat ->
-                Row(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(
-                        modifier = Modifier.weight(1f)
+            state.testResultat.let { testResultats ->
+                items(state.testResultat) { testresultat ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(
-                            text = "Name: ${testresultat.name}\n" +
-                                    "Id: ${testresultat.reason}\n" +
-                                    "Test Point: ${testresultat.sniffingPoint}\n" +
-                                    "Status: ${testresultat.status}\n" +
-                                    "Beskrivelse: ${testresultat.description}\n" +
-                                    "Object Type: ${testresultat.objectType}",
-                            fontSize = 20.sp
-                        )
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = "Name: ${testresultat.name}\n" +
+                                        "Id: ${testresultat.reason}\n" +
+                                        "Test Point: ${testresultat.sniffingPoint}\n" +
+                                        "Status: ${testresultat.status}\n" +
+                                        "Beskrivelse: ${testresultat.description}\n" +
+                                        "Object Type: ${testresultat.objectType}",
+                                fontSize = 20.sp
+                            )
 
-                    }
-                    IconButton(onClick = {
-                        onEvent(AppEvent.DeleteTestResultat(testresultat))
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete contact"
-                        )
+                        }
+                        IconButton(onClick = {
+                            onEvent(AppEvent.DeleteTestResultat(testresultat._id))
+                        }) {
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = "Delete contact"
+                            )
+                        }
                     }
                 }
             }
-        }
     }
 }
 

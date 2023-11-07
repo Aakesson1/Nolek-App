@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.example.nolekapp.ApiActivity
 import com.example.nolekapp.CameraActivity
 import com.example.nolekapp.DatabaseActivity
 import com.example.nolekapp.MainActivity
@@ -51,6 +52,12 @@ fun NolekAppMenu() {
                 context.startActivity(intent)
             }) {
                 Text("DATABASE")
+            }
+            Button(onClick = {
+                val intent = Intent(context, ApiActivity::class.java)
+                context.startActivity(intent)
+            }) {
+                Text("API")
             }
         }
 

@@ -1,6 +1,7 @@
 package com.example.nolekapp.Model
 
 import com.example.nolekapp.Database.Data.TestResultat
+import org.mongodb.kbson.ObjectId
 
 sealed interface AppEvent {
     object SaveTestResultat: AppEvent
@@ -13,6 +14,6 @@ sealed interface AppEvent {
     object ShowDialog: AppEvent
     object HideDialog: AppEvent
     data class SortTestResultat(val sortType: SortType): AppEvent
-    data class DeleteTestResultat(val testResultat: TestResultat): AppEvent
+    data class DeleteTestResultat(val testResultat: ObjectId): AppEvent
 
 }
