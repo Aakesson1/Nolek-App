@@ -18,6 +18,10 @@ class MainActivity : AppCompatActivity() {
 
     private val statusViewModel: StatusViewModel by viewModels()
     private val testResultatViewModel: TestResultatViewModel by viewModels()
+    private fun navigateToMenu() {
+        val intent = Intent(this, MenuActivity::class.java)
+        startActivity(intent)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             NolekAppTheme {
-                CustomLayout(statusViewModel = statusViewModel)
+                CustomLayout(statusViewModel = statusViewModel,navigateToMenu = ::navigateToMenu)
             }
         }
     }

@@ -54,7 +54,6 @@
                 android:text="Reason:"
                 android:textStyle="bold" />
 
-            <!-- Tilføj flere label-TextViews efter behov -->
 
         </LinearLayout>
 
@@ -95,7 +94,6 @@
                 android:paddingBottom="4dp"
                 android:text="Reason Value" />
 
-            <!-- Tilføj flere værdi-TextViews efter behov -->
 
         </LinearLayout>
     </LinearLayout>

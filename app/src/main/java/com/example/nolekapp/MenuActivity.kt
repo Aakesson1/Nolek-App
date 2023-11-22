@@ -3,6 +3,7 @@ package com.example.nolekapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.activity.compose.setContent
 import com.example.nolekapp.Database.MongoDB.app
@@ -17,6 +18,16 @@ class MenuActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        runBlocking {
+            val anonymousCredentials = Credentials.anonymous()
+            val user = app.login(anonymousCredentials)
+
+            if (user != null) {
+                Log.d("DatabaseActivity", "Bruger er logget ind med ID: ${user.id}")
+            } else {
+                Log.e("DatabaseActivity", "Fejl: Bruger kunne ikke logge ind.")
+            }
+        }
             setContent {
                 NolekAppTheme {
                     NolekAppMenu()

@@ -19,15 +19,24 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/screenshot_2023_09_28_192843"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/screenshot_2023_09_28_192843"
         android:supportsRtl="true"
         android:theme="@style/Theme.NolekApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".PostApiActivity"
+            android:exported="false" />
         <activity
             android:name=".ApiActivity"
             android:exported="false" />
         <activity
             android:name=".CameraActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NolekApp" />
+        <activity
+            android:name=".CameraActivityCompose"
             android:exported="false"
             android:theme="@style/Theme.NolekApp" />
         <activity
@@ -42,6 +51,11 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.NolekApp" />
+        <activity
+            android:name=".ApiMenu"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.NolekApp" />

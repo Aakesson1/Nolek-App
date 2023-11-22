@@ -8,6 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nolekapp.Database.Data.LeakTestData
 import com.example.nolekapp.R
+import com.google.gson.TypeAdapter
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonWriter
+import org.mongodb.kbson.ObjectId
+
 
 class ApiAdapter(val context: Context, var userList: List<LeakTestData>): RecyclerView.Adapter<ApiAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -38,5 +43,14 @@ init {
         holder.reason.text = userList[position].reason
         holder.sniffingPoint.text = userList[position].sniffingPoint
 
+    }
+}
+class ObjectIdTypeAdapter : TypeAdapter<ObjectId>() {
+    override fun write(out: JsonWriter, value: ObjectId) {
+        out.value(value.toHexString())
+    }
+
+    override fun read(`in`: JsonReader): ObjectId {
+        return ObjectId(`in`.nextString())
     }
 }

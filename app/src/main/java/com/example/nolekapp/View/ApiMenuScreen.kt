@@ -1,87 +1,92 @@
 package com.example.nolekapp.View
 
+import com.example.nolekapp.PostApiActivity
+
+
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import com.example.nolekapp.ApiMenu
-import com.example.nolekapp.CameraActivityCompose
+import com.example.nolekapp.ApiActivity
+import com.example.nolekapp.CameraActivity
 import com.example.nolekapp.DatabaseActivity
 import com.example.nolekapp.MainActivity
-import com.example.nolekapp.R
+import com.example.nolekapp.MenuActivity
+import com.example.nolekapp.Model.AppEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NolekAppMenu() {
+fun ApiMenu(navigateToMenu: () -> Unit) {
     val context = LocalContext.current
-    val customIcon: Painter = painterResource(id = R.drawable.baseline_photo_camera_24)
-
     Scaffold(
-        floatingActionButton = {
-            FloatingActionButton(onClick = {
-                val intent = Intent(context, CameraActivityCompose::class.java)
-                context.startActivity(intent)
-            }) {
-                Icon(
-                    painter = customIcon,
-                    contentDescription = "Custom Camera Icon"
-                )
-            }
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text("Api Menu")
+                },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navigateToMenu()
+                    }) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
         }
-    ) { innerPadding ->
+    )
+    {innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
             contentAlignment = Alignment.Center
-        ) {
+        )  {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.align(Alignment.Center)
+                modifier = Modifier.align(Alignment.TopCenter)
             ) {
-                Text("Nolek App", style = MaterialTheme.typography.headlineMedium)
-                Spacer(modifier = Modifier.weight(1f))
 
+            }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 Button(onClick = {
-                    val intent = Intent(context, MainActivity::class.java)
+                    val intent = Intent(context, ApiActivity::class.java)
                     context.startActivity(intent)
                 }) {
-                    Text("START")
+                    Text("Get")
                 }
 
                 Button(onClick = {
-                    val intent = Intent(context, DatabaseActivity::class.java)
+                    val intent = Intent(context, PostApiActivity::class.java)
                     context.startActivity(intent)
                 }) {
-                    Text("DATABASE")
+                    Text("Post")
                 }
-
-                Button(onClick = {
-                    val intent = Intent(context, ApiMenu::class.java)
-                    context.startActivity(intent)
-                }) {
-                    Text("API")
-                }
-                Spacer(modifier = Modifier.weight(1f))
             }
         }
     }
 }
+
+

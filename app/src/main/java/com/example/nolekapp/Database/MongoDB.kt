@@ -26,20 +26,9 @@ object MongoDB: TestResultatRepository {
 
     init {
             configureTheRealm()
-
     }
-
     override fun configureTheRealm() {
-        runBlocking {
-            val anonymousCredentials = Credentials.anonymous()
-            val user = app.login(anonymousCredentials)
 
-            if (user != null) {
-                Log.d("DatabaseActivity", "Bruger er logget ind med ID: ${user.id}")
-            } else {
-                Log.e("DatabaseActivity", "Fejl: Bruger kunne ikke logge ind.")
-            }
-        }
 
         if (user != null) {
             val config = SyncConfiguration.Builder(user,

@@ -48,7 +48,7 @@ fun ApiActivity() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    // Handle søgeaktionen her
+
                 }
             ),
             modifier = Modifier
@@ -90,7 +90,7 @@ fun ApiActivity() {
                     modifier = Modifier.padding(top = 4.dp)
                 )
 
-                // Tilføj flere Text() komponenter for hver attribut, du vil vise
+
             }
         }
 

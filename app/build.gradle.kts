@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.nolekapp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -43,6 +43,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -87,6 +88,12 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.test:runner:1.5.2")
     implementation("androidx.compose.ui:ui-android:1.5.4")
+    implementation("androidx.camera:camera-core:1.3.0")
+    implementation("androidx.camera:camera-lifecycle:1.3.0")
+    implementation("androidx.camera:camera-view:1.3.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
+    implementation("androidx.privacysandbox.tools:tools-core:1.0.0-alpha06")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -151,5 +158,18 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     // Gson converter for Retrofit
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // CameraX core library
+    implementation ("androidx.camera:camera-core:1.3.0")
+
+    // CameraX Camera2 library
+    implementation ("androidx.camera:camera-camera2:1.3.0")
+
+    // If you want to use the ViewFinder, include camera-view
+    implementation ("androidx.camera:camera-view:1.3.0")
+
+    // If you want to use CameraX Lifecycle library
+    implementation ("androidx.camera:camera-lifecycle:1.3.0")
+    implementation ("com.google.guava:guava:30.1-android")
 
 }

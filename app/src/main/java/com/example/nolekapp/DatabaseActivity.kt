@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.realm.kotlin.RealmConfiguration
-
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -24,7 +23,6 @@ import io.realm.kotlin.internal.platform.runBlocking
 import io.realm.kotlin.mongodb.App
 import okhttp3.Credentials
 
-// ...
 class DatabaseActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<TestResultatViewModel> {
