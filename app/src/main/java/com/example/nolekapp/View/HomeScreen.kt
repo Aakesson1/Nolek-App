@@ -76,7 +76,6 @@ fun CustomLayout(statusViewModel: StatusViewModel,navigateToMenu: () -> Unit) {
         Box(
             modifier =
             Modifier.fillMaxSize().padding(innerPadding)
-
         ) {
             }
 
@@ -89,7 +88,7 @@ fun CustomLayout(statusViewModel: StatusViewModel,navigateToMenu: () -> Unit) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(400.dp)
                         .border(2.dp, color = Color.Black)
                 ) {
                     if (selectedImageUri != null) {

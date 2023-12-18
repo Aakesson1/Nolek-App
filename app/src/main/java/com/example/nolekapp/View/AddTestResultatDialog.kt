@@ -43,7 +43,7 @@ fun AddTestResultatDialog(
                     }
                 )
                 TextField(
-                    value = state.Reason,
+                    value = state.EmployeeId,
                     onValueChange = {
                         onEvent(AppEvent.SetReason(it))
                     },

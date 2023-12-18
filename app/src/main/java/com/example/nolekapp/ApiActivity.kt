@@ -10,6 +10,7 @@ import androidx.privacysandbox.tools.core.model.Type
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nolekapp.Database.Constants.BASE_URL
+import com.example.nolekapp.Database.Constants.BASE_URL2
 import com.example.nolekapp.Database.Data.LeakTestData
 import com.example.nolekapp.Database.Data.TestResultat
 import com.example.nolekapp.Model.ApiAdapter
@@ -63,26 +64,14 @@ class ApiActivity : AppCompatActivity() {
         private fun goToMenuActivity() {
             finish()
         }
-    val dataToSign = "Eksempel på data der skal signeres"
-    val privateKeyBase64 = "D1f35aD234"
+
     @SuppressLint("SuspiciousIndentation")
     private fun getMyData() {
-        // Opret OkHttpClient med interceptor til at tilføje signaturen
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor { chain ->
-                val originalRequest = chain.request()
-                val signedRequest = originalRequest.newBuilder()
-                    .addHeader("X-Proxy-Signature", generateSignature(dataToSign, privateKeyBase64)) // Erstat 'generateSignature()' med din signaturgenereringsmetode
-                    .build()
-                chain.proceed(signedRequest)
-            }
-            .build()
 
-        // Opret Retrofit instance med den tilpassede OkHttpClient
+
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL2)
             .build()
 
         val service = retrofit.create(LeakTestApiService::class.java)
@@ -114,16 +103,4 @@ class ApiActivity : AppCompatActivity() {
         }
 
     }
-fun generateSignature(data: String, privateKeyBase64: String): String {
-    val keyFactory = KeyFactory.getInstance("RSA")
-    val privateKeySpec = PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKeyBase64))
-    val privateKey: PrivateKey = keyFactory.generatePrivate(privateKeySpec)
-
-    val signature = Signature.getInstance("SHA256withRSA")
-    signature.initSign(privateKey)
-    signature.update(data.toByteArray())
-
-    val digitalSignature = signature.sign()
-    return Base64.getEncoder().encodeToString(digitalSignature)
-}
 

@@ -1,8 +1,6 @@
 package com.example.nolekapp.Model
 
 import com.example.nolekapp.Database.Data.TestResultat
-import com.example.nolekapp.Model.SortType
-import java.util.Date
 
 data class TestResultatState(
     val testResultat: List<TestResultat> = emptyList(),
@@ -10,7 +8,7 @@ data class TestResultatState(
     val Description: String = "",
     val sniffing_point: String = "",
     val Objecttype: String = "",
-    val Reason: String = "",
+    val EmployeeId: String = "",
     val Status: String= "",
     val isAddingTestResultat: Boolean = false,
     val sortType: SortType = SortType.NAME

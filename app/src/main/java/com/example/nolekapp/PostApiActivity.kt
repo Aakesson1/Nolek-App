@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import com.example.nolekapp.Database.Constants.BASE_URL
-import com.example.nolekapp.Database.Data.LeakTestData
+import com.example.nolekapp.Database.Constants.BASE_URL2
 import com.example.nolekapp.Database.Data.TestResultat
 import com.example.nolekapp.Database.MongoDB
 import com.example.nolekapp.Model.ObjectIdTypeAdapter
@@ -69,7 +68,7 @@ class PostApiActivity : AppCompatActivity() {
             .create()
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL2)
             .build()
             .create(LeakTestApiService::class.java)
 

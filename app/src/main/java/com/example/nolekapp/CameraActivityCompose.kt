@@ -1,8 +1,10 @@
 package com.example.nolekapp
 
+import android.media.MediaScannerConnection
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.camera.core.ImageCapture
@@ -25,6 +27,7 @@ class CameraActivityCompose : AppCompatActivity() {
         imageCapture = ImageCapture.Builder().build()
         setContent {
             CameraScreen(
+                imageCapture = imageCapture ?: return@setContent,
                 onCapture = { takePicture() },
                 onBackPressed = { finish() }
             )
@@ -32,7 +35,7 @@ class CameraActivityCompose : AppCompatActivity() {
     }
 
     private fun takePicture() {
-        val localImageCapture = imageCapture ?: return // Early return if null
+        val localImageCapture = imageCapture ?: return
 
         val photoFile = createFile(getOutputDirectory(), FILENAME_FORMAT, PHOTO_EXTENSION)
         val outputFileOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
@@ -43,8 +46,9 @@ class CameraActivityCompose : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val savedUri = outputFileResults.savedUri ?: Uri.fromFile(photoFile)
-                    val msg = "Photo capture succeeded: $savedUri"
+                    val msg = "Photo captured"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                    notifyMediaScanner(photoFile)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -53,6 +57,10 @@ class CameraActivityCompose : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    private fun notifyMediaScanner(photoFile: File) {
+        MediaScannerConnection.scanFile(this, arrayOf(photoFile.toString()), null, null)
     }
 
     override fun onDestroy() {
@@ -70,8 +78,10 @@ class CameraActivityCompose : AppCompatActivity() {
             File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
         }
         return if (mediaDir != null && mediaDir.exists())
-            mediaDir else filesDir
+            mediaDir else Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
     }
     private fun createFile(baseFolder: File, format: String, extension: String) = File(baseFolder, SimpleDateFormat(format, Locale.US)
         .format(System.currentTimeMillis()) + extension)
 }
+
+ 

@@ -1,6 +1,5 @@
 package com.example.nolekapp.Model
 
-import com.example.nolekapp.Database.Data.TestResultat
 import org.mongodb.kbson.ObjectId
 
 sealed interface AppEvent {

@@ -43,7 +43,7 @@ class TestResultatViewModel @Inject constructor(private val repository: TestResu
                     val description = state.value.Description
                     val sniffingPoint = state.value.sniffing_point
                     val objectType = state.value.Objecttype
-                    val reason = state.value.Reason
+                    val reason = state.value.EmployeeId
                     val status= state.value.Status
 
                     val newTestResultat = TestResultat().apply {
@@ -61,7 +61,7 @@ class TestResultatViewModel @Inject constructor(private val repository: TestResu
                             Name = "",
                             Description = "",
                             sniffing_point = "",
-                            Reason = "",
+                            EmployeeId = "",
                             Status = "",
                             Objecttype = ""
                         )
@@ -104,7 +104,7 @@ class TestResultatViewModel @Inject constructor(private val repository: TestResu
             is AppEvent.SetReason -> {
                 _state.update {
                     it.copy(
-                        Reason = event.Reason
+                        EmployeeId = event.Reason
                     )
                 }
             }

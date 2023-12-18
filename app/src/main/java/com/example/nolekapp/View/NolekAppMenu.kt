@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import com.example.nolekapp.ApiMenu
+import com.example.nolekapp.CameraActivity
 import com.example.nolekapp.CameraActivityCompose
 import com.example.nolekapp.DatabaseActivity
 import com.example.nolekapp.MainActivity

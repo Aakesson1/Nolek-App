@@ -8,9 +8,9 @@ import retrofit2.Call
 
 interface LeakTestApiService {
 
-    @GET("api/MongoDB")
+    @GET("GetTestResult")
     fun getAllLeakTests(): Call<List<LeakTestData>>
-    @POST("api/MongoDB")
+    @POST("CreateTestResult")
     fun addLeakTest(@Body newTest: TestResultat): Call<TestResultat>
 
 
